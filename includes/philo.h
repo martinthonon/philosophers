@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <limits.h>
+#include <stdarg.h>
 
 typedef struct s_dllist_node {
 
@@ -26,8 +27,7 @@ typedef struct s_dllist
     uint32_t time_to_die;
     uint32_t time_to_eat;
     uint32_t time_to_sleep;
-    uint32_t n_meals_till_full;
-    
+    uint32_t *n_meals_till_full;
 }              t_dllist;
 
 enum e_status {
@@ -38,13 +38,16 @@ enum e_status {
 };
 
 
-bool ft_container_init(t_dllist **struct_sentinel);
-bool ft_philo_init(int argc, char **argv, t_dllist *struct_sentinel);
+bool ft_container_create(t_dllist **struct_sentinel);
+bool ft_container_init(int argc, char **argv, t_dllist *struct_sentinel);
+bool ft_list_init(t_dllist_node *sentinel_node, size_t list_size);
+bool ft_philo_init(int argc, char **argv, t_dllist **struct_sentinel);
 
 t_dllist_node *ft_list_add_back(t_dllist_node *sentinel_node, size_t index);
 void ft_list_destroy(t_dllist *struct_sentinel);
 t_dllist *ft_list_new();
 
+int	ft_free(const char *formats, ...);
 size_t ft_str_to_ul(char *str, bool *is_overflow);
 uint32_t ft_str_to_ui(char *str, bool *is_overflow);
 
