@@ -1,9 +1,9 @@
 #include "philo.h"
 
-bool ft_philo_init(int argc, char **argv, t_dllist **struct_sentinel);
+bool ft_arg_init(int argc, char **argv, t_dllist **struct_sentinel);
 
 
-bool ft_philo_init(int argc, char **argv, t_dllist **struct_sentinel)
+bool ft_arg_init(int argc, char **argv, t_dllist **struct_sentinel)
 {
 
     if (ft_container_create(struct_sentinel) == true)

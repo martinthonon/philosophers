@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 
     if (argc < 5 || argc > 6)
         return (1);
-    if (ft_philo_init(argc, ++argv, &container) == true)
+    if (ft_arg_init(argc, ++argv, &container) == true)
         return (1); 
     if (ft_process(container) == true)
     {

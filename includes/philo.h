@@ -30,6 +30,13 @@ typedef struct s_dllist
     uint32_t *n_meals_till_full;
 }              t_dllist;
 
+typedef struct s_thread_infos
+{
+    pthread_t thread_id;
+    t_dllist *container;
+    t_dllist_node *node;
+}               t_thread_infos;
+
 enum e_status {
 
     thinking = 0,
@@ -37,19 +44,22 @@ enum e_status {
     sleeping = 2,
 };
 
-
 bool ft_container_create(t_dllist **struct_sentinel);
 bool ft_container_init(int argc, char **argv, t_dllist *struct_sentinel);
 bool ft_list_init(t_dllist_node *sentinel_node, size_t list_size);
-bool ft_philo_init(int argc, char **argv, t_dllist **struct_sentinel);
+bool ft_arg_init(int argc, char **argv, t_dllist **struct_sentinel);
+bool ft_thread_init(t_dllist *container, t_thread_infos **philosopher);
+
 
 t_dllist_node *ft_list_add_back(t_dllist_node *sentinel_node, size_t index);
 void ft_list_destroy(t_dllist *struct_sentinel);
 t_dllist *ft_list_new();
 
+bool ft_process(t_dllist *container);
+void *ft_routine(void *arg);
+
 int	ft_free(const char *formats, ...);
 size_t ft_str_to_ul(char *str, bool *is_overflow);
 uint32_t ft_str_to_ui(char *str, bool *is_overflow);
-
 
 #endif
