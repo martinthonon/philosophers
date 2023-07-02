@@ -18,8 +18,11 @@ SRCS_PHILO:= main \
 				list/list_add_back \
 				list/list_destroy \
 				list/list_new \
+				process/eat \
 				process/process \
 				process/routine \
+				process/sleep \
+				process/think \
 				utils/free \
 				utils/str_to_num
 
@@ -31,7 +34,7 @@ DEPS:=	${OBJS:.o=.d}
 
 CFLAGS:= -Wall -Wextra -Werror -Wuninitialized -Winit-self -Wshadow -Wdouble-promotion -Wundef -fno-common -Wconversion -Os -g3 -O3
 
-#SANITIZE:= -fsanitize=address -g3 -O3 -fno-omit-frame-pointer
+SANITIZE:= -fsanitize=address -g3 -O3 -fno-omit-frame-pointer
 
 CPPFLAGS:= ${addprefix -I,${INC_DIR}} -MMD -MP
 
@@ -40,12 +43,12 @@ RM:=	rm -rf
 all: ${NAME}
 
 ${NAME}: ${OBJS} ${LIBFT}
-	${CC}  ${OBJS} -o $@
+	${CC} ${OBJS} ${SANITIZE} -o $@
 	@printf "$(COLOR_GREEN)Compilation completed.$(COLOR_RESET)\n"
 
 ${BUILD_DIR}/%.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(CPPFLAGS) ${CFLAGS}  -c $< -o $@
+	$(CC) $(CPPFLAGS) ${CFLAGS} ${SANITIZE} -c $< -o $@
 
 clean:
 	${RM} ${BUILD_DIR}

@@ -16,6 +16,7 @@ void ft_list_destroy(t_dllist *struct_sentinel)
         free(node_tmp);
     }
     free(sentinel_node_cpy);
-    free(struct_sentinel->n_meals_till_full);
+    free(struct_sentinel->n_fork);
+    free(struct_sentinel->n_meal_till_full);
     free(struct_sentinel);
 }
