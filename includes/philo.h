@@ -48,8 +48,10 @@ bool ft_container_create(t_dllist **struct_sentinel);
 bool ft_container_init(int argc, char **argv, t_dllist *struct_sentinel);
 bool ft_list_init(t_dllist_node *sentinel_node, size_t list_size);
 bool ft_arg_init(int argc, char **argv, t_dllist **struct_sentinel);
-bool ft_thread_create(t_dllist *container, t_thread_args **philosopher);
+bool ft_thread_create(size_t size, t_thread_args **philosopher);
 t_thread_args ft_thread_init(t_dllist *container, t_thread_args philosopher, t_dllist_node *node);
+bool ft_mutex_init(size_t size, pthread_mutex_t *fork);
+bool ft_mutex_destroy(size_t size, pthread_mutex_t *fork);
 
 
 t_dllist_node *ft_list_add_back(t_dllist_node *sentinel_node, size_t index);

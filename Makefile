@@ -14,6 +14,7 @@ SRCS_PHILO:= main \
 				init/arg_init \
 				init/container_init \
 				init/list_init \
+				init/mutex_init \
 				init/thread_init \
 				list/list_add_back \
 				list/list_destroy \
