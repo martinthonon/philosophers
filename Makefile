@@ -45,7 +45,7 @@ all: ${NAME}
 
 ${NAME}: ${OBJS} ${LIBFT}
 	${CC} ${OBJS} ${SANITIZE} -o $@
-	@printf "$(COLOR_GREEN)Compilation completed.$(COLOR_RESET)\n"
+	echo "$(COLOR_GREEN)Compilation completed.$(COLOR_RESET)"
 
 ${BUILD_DIR}/%.o: %.c
 	mkdir -p $(dir $@)
@@ -53,11 +53,11 @@ ${BUILD_DIR}/%.o: %.c
 
 clean:
 	${RM} ${BUILD_DIR}
-	@printf "$(COLOR_GREEN)Objects cleaned.$(COLOR_RESET)\n"
+	echo "$(COLOR_GREEN)Objects cleaned.$(COLOR_RESET)"
 
 fclean: clean
 	${RM} ${NAME}
-	@printf "$(COLOR_GREEN)executables cleaned.$(COLOR_RESET)\n"
+	echo "$(COLOR_GREEN)executables cleaned.$(COLOR_RESET)"
 
 re: fclean all
 
