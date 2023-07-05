@@ -9,6 +9,7 @@
 #include <stdint.h>
 #include <limits.h>
 #include <stdarg.h>
+#include <sys/time.h>
 
 typedef struct s_dllist_node {
 
@@ -56,7 +57,7 @@ bool ft_mutex_destroy(size_t size, pthread_mutex_t *fork);
 
 t_dllist_node *ft_list_add_back(t_dllist_node *sentinel_node, size_t index);
 void ft_list_destroy(t_dllist *struct_sentinel);
-t_dllist *ft_list_new();
+t_dllist *ft_list_new(void);
 
 bool ft_process(t_dllist *container);
 void *ft_routine(void *arg);
@@ -64,8 +65,9 @@ void ft_think(t_thread_args *philosopher);
 void ft_eat(t_thread_args *philosopher);
 void ft_sleep(t_thread_args *philosopher);
 
-int	ft_free(const char *formats, ...);
-size_t ft_str_to_ul(char *str, bool *is_overflow);
+void	ft_free(const char *formats, ...);
 uint32_t ft_str_to_ui(char *str, bool *is_overflow);
+long ft_get_time(void);
+size_t ft_str_to_ul(char *str, bool *is_overflow);
 
 #endif

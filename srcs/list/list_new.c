@@ -1,8 +1,8 @@
 #include "philo.h"
 
-t_dllist *ft_list_new();
+t_dllist *ft_list_new(void);
 
-t_dllist *ft_list_new()
+t_dllist *ft_list_new(void)
 {
     t_dllist *struct_sentinel;
     t_dllist_node *sentinel_node;

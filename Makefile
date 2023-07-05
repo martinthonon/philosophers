@@ -25,7 +25,8 @@ SRCS_PHILO:= main \
 				process/sleep \
 				process/think \
 				utils/free \
-				utils/str_to_num
+				utils/str_to_num \
+				utils/time
 
 SRCS:=	${addprefix ${SRCS_DIR}/, ${addsuffix .c, ${SRCS_PHILO}}}
 

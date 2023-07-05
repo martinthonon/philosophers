@@ -1,6 +1,8 @@
 #include "philo.h"
 
-int	ft_free(const char *formats, ...)
+void	ft_free(const char *formats, ...);
+
+void	ft_free(const char *formats, ...)
 {
 	va_list	ap;
 	int		i;
@@ -26,6 +28,5 @@ int	ft_free(const char *formats, ...)
 		++formats;
 	}
 	va_end(ap);
-    return (0);
 }
 	
