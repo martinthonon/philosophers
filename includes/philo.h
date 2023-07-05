@@ -41,8 +41,10 @@ typedef struct s_thread_args
 enum e_status {
 
     thinking = 0,
-    eating = 1,
-    sleeping = 2,
+    hungry = 1,
+    eating = 2,
+    sleeping = 3,
+    dead = 4
 };
 
 bool ft_container_create(t_dllist **struct_sentinel);

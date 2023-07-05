@@ -10,7 +10,7 @@ void *ft_routine(void *arg)
     n_meal = 1;
     while (n_meal++ <= *philosopher->container->n_meal_till_full)
     {
-        printf("pilosopher n °%zu\n", philosopher->node->index);
+        printf("\n");
         ft_think(philosopher);
         ft_eat(philosopher);
         ft_sleep(philosopher);
