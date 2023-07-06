@@ -35,9 +35,7 @@ static bool ft_thread_start(t_dllist *container, t_thread_args *philosopher, t_d
     }
     i = 0;
     while (i < container->size)
-    {
       if (pthread_join(philosopher[i++].thread_id, &result) != 0)
         return (true);  
-    }
     return (false);
 }

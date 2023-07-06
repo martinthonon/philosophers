@@ -18,6 +18,7 @@ typedef struct s_dllist_node {
     struct s_dllist_node *prev;
     struct s_dllist_node *next;
     size_t index;
+    uint64_t time_till_last_meal;
     uint32_t n_meal;
     uint8_t status;
 }              t_dllist_node;
@@ -27,9 +28,9 @@ typedef struct s_dllist
     t_dllist_node *sentinel_node;
     pthread_mutex_t *n_fork;
     size_t size;
-    uint32_t time_to_die;
-    uint32_t time_to_eat;
-    uint32_t time_to_sleep;
+    uint64_t time_to_die;
+    uint64_t time_to_eat;
+    uint64_t time_to_sleep;
     uint32_t *n_meal_till_full;
 }              t_dllist;
 
@@ -49,30 +50,33 @@ enum e_status {
     dead = 4
 };
 
+
+t_thread_args ft_thread_init(t_dllist *container, t_thread_args philosopher, t_dllist_node *node);
 bool ft_container_create(t_dllist **struct_sentinel);
 bool ft_container_init(int argc, char **argv, t_dllist *struct_sentinel);
 bool ft_list_init(t_dllist_node *sentinel_node, size_t list_size);
 bool ft_arg_init(int argc, char **argv, t_dllist **struct_sentinel);
 bool ft_thread_create(size_t size, t_thread_args **philosopher);
-t_thread_args ft_thread_init(t_dllist *container, t_thread_args philosopher, t_dllist_node *node);
 bool ft_mutex_init(size_t size, pthread_mutex_t *fork);
 bool ft_mutex_destroy(size_t size, pthread_mutex_t *fork);
 
-
 t_dllist_node *ft_list_add_back(t_dllist_node *sentinel_node, size_t index);
-void ft_list_destroy(t_dllist *struct_sentinel);
 t_dllist *ft_list_new(void);
+void ft_list_destroy(t_dllist *struct_sentinel);
 
-bool ft_process(t_dllist *container);
 void *ft_routine(void *arg);
+bool ft_take_fork(t_thread_args *philosopher);
+bool ft_put_fork(t_thread_args *philosopher);
+bool ft_process(t_dllist *container);
+
 void ft_think(t_thread_args *philosopher);
 void ft_eat(t_thread_args *philosopher);
 void ft_sleep(t_thread_args *philosopher);
 
-void	ft_free(const char *formats, ...);
-uint32_t ft_str_to_ui(char *str, bool *is_overflow);
+uint64_t ft_str_to_ul(char *str, bool *is_overflow);
 uint64_t ft_get_time_ms(void);
+uint32_t ft_str_to_ui(char *str, bool *is_overflow);
 bool ft_diff_time_ms(uint64_t start_time, uint64_t diff_time);
-size_t ft_str_to_ul(char *str, bool *is_overflow);
+void	ft_free(const char *formats, ...);
 
 #endif

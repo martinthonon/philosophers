@@ -11,22 +11,23 @@ SRCS_DIR:= srcs
 INC_DIR:= includes
 
 SRCS_PHILO:= main \
-				init/arg_init \
-				init/container_init \
-				init/list_init \
-				init/mutex_init \
-				init/thread_init \
-				list/list_add_back \
-				list/list_destroy \
-				list/list_new \
-				process/eat \
-				process/process \
-				process/routine \
-				process/sleep \
-				process/think \
-				utils/free \
-				utils/str_to_num \
-				utils/time
+			init/init \
+			init/struct_related/container_init \
+			init/struct_related/list_init \
+			init/thread_related/mutex_init \
+			init/thread_related/thread_init \
+			list/list_add_back \
+			list/list_destroy \
+			list/list_new \
+			process/routine/eat \
+			process/routine/fork \
+			process/routine/routine \
+			process/routine/sleep \
+			process/routine/think \
+			process/process \
+			utils/free \
+			utils/str_to_num \
+			utils/time
 
 SRCS:=	${addprefix ${SRCS_DIR}/, ${addsuffix .c, ${SRCS_PHILO}}}
 
@@ -44,7 +45,7 @@ RM:=	rm -rf
 
 all: ${NAME}
 
-${NAME}: ${OBJS} ${LIBFT}
+${NAME}: ${OBJS}
 	${CC} ${OBJS} ${SANITIZE} -o $@
 	echo "$(COLOR_GREEN)Compilation completed.$(COLOR_RESET)"
 
