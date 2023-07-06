@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include <pthread.h>
 #include <stdbool.h>
@@ -10,6 +11,7 @@
 #include <limits.h>
 #include <stdarg.h>
 #include <sys/time.h>
+
 
 typedef struct s_dllist_node {
 
@@ -69,7 +71,8 @@ void ft_sleep(t_thread_args *philosopher);
 
 void	ft_free(const char *formats, ...);
 uint32_t ft_str_to_ui(char *str, bool *is_overflow);
-long ft_get_time(void);
+uint64_t ft_get_time_ms(void);
+bool ft_diff_time_ms(uint64_t start_time, uint64_t diff_time);
 size_t ft_str_to_ul(char *str, bool *is_overflow);
 
 #endif
