@@ -28,9 +28,9 @@ typedef struct s_dllist
     t_dllist_node *sentinel_node;
     pthread_mutex_t *n_fork;
     size_t size;
-    uint64_t time_to_die;
-    uint64_t time_to_eat;
-    uint64_t time_to_sleep;
+    uint32_t time_to_die;
+    uint32_t time_to_eat;
+    uint32_t time_to_sleep;
     uint32_t *n_meal_till_full;
 }              t_dllist;
 
