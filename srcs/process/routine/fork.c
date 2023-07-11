@@ -10,7 +10,7 @@ bool ft_take_fork(t_thread_args *philosopher)
     if (((philosopher->node->index) & 1) == 1)
         usleep(3000);
     if (ft_diff_time_ms(philosopher->node->time_till_last_meal, (uint64_t)philosopher->container->time_to_die))
-        printf("iis dead\n");
+        printf("is dead\n");
     pthread_mutex_lock(&philosopher->container->n_fork[philosopher->node->index]);
     pthread_mutex_lock(&philosopher->container->n_fork[philosopher->node->index + 1]);
     return (false);
