@@ -13,8 +13,8 @@
 #include <sys/time.h>
 
 
-typedef struct s_dllist_node {
-
+typedef struct s_dllist_node 
+{
     struct s_dllist_node *prev;
     struct s_dllist_node *next;
     size_t index;
@@ -32,6 +32,8 @@ typedef struct s_dllist
     uint32_t time_to_eat;
     uint32_t time_to_sleep;
     uint32_t *n_meal_till_full;
+    _Atomic bool is_a_philo_dead;
+    
 }              t_dllist;
 
 typedef struct s_thread_args
