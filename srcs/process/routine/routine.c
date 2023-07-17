@@ -12,11 +12,11 @@ void *ft_routine(void *arg)
     if (philosopher->container->n_meal_till_full != NULL)
     {
         n_meal = 1;
-        while (n_meal++ <= *philosopher->container->n_meal_till_full && philosopher->container->is_a_philo_dead == false)
+        while (n_meal++ <= *philosopher->container->n_meal_till_full)
             ft_task(philosopher);
     }
     else
-        while (true && philosopher->container->is_a_philo_dead == false)
+        while (true)
             ft_task(philosopher);
     return (NULL);
 }

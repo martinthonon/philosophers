@@ -12,6 +12,8 @@
 #include <stdarg.h>
 #include <sys/time.h>
 
+# define SENTINEL_MUTEX -1
+
 
 typedef struct s_dllist_node 
 {
@@ -27,12 +29,12 @@ typedef struct s_dllist
 {
     t_dllist_node *sentinel_node;
     pthread_mutex_t *n_fork;
+    pthread_mutex_t lock_print;
     size_t size;
     uint32_t time_to_die;
     uint32_t time_to_eat;
     uint32_t time_to_sleep;
     uint32_t *n_meal_till_full;
-    _Atomic bool is_a_philo_dead;
     
 }              t_dllist;
 

@@ -9,9 +9,9 @@ bool ft_process(t_dllist *container)
     
     if (ft_thread_create(container->size, &philosopher) == true)
         return (true);
-    if (ft_mutex_init(container->size, container->n_fork) == true)
+    if (ft_mutex_init(container->size, container->n_fork) == true) // variadic ?
         return (free(philosopher), true);
-    if (ft_thread_start(container, philosopher, container->sentinel_node->next) == true)
+    if (ft_thread_start(container, philosopher, container->sentinel_node->next) == true) //mutex destroy !!
         return (free(philosopher), true);
     if (ft_mutex_destroy(container->size, container->n_fork) == true)
         return (free(philosopher), true);
