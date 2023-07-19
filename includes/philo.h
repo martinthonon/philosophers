@@ -12,7 +12,8 @@
 #include <stdarg.h>
 #include <sys/time.h>
 
-# define SENTINEL_MUTEX -1
+# define INIT 1
+# define DESTROY 0
 
 
 typedef struct s_dllist_node 
@@ -61,8 +62,9 @@ bool ft_container_init(int argc, char **argv, t_dllist *struct_sentinel);
 bool ft_list_init(t_dllist_node *sentinel_node, size_t list_size);
 bool ft_arg_init(int argc, char **argv, t_dllist **struct_sentinel);
 bool ft_thread_create(size_t size, t_thread_args **philosopher);
-bool ft_mutex_init(size_t size, pthread_mutex_t *fork);
-bool ft_mutex_destroy(size_t size, pthread_mutex_t *fork);
+bool ft_mutex_flag(uint8_t flag, char *formats, ...);
+// bool ft_mutex_init(size_t size, pthread_mutex_t *fork);
+// bool ft_mutex_destroy(size_t size, pthread_mutex_t *fork);
 
 t_dllist_node *ft_list_add_back(t_dllist_node *sentinel_node, size_t index);
 t_dllist *ft_list_new(void);

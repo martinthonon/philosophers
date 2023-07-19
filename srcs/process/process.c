@@ -9,12 +9,12 @@ bool ft_process(t_dllist *container)
     
     if (ft_thread_create(container->size, &philosopher) == true)
         return (true);
-    if (ft_mutex_init(container->size, container->n_fork) == true) // variadic ?
+    if (ft_mutex_flag(INIT, "%m, %M", container->lock_print, container->n_fork) == true)
         return (free(philosopher), true);
-    if (ft_thread_start(container, philosopher, container->sentinel_node->next) == true) //mutex destroy !!
+    if (ft_thread_start(container, philosopher, container->sentinel_node->next) == true)
         return (free(philosopher), true);
-    if (ft_mutex_destroy(container->size, container->n_fork) == true)
-        return (free(philosopher), true);
+    if (ft_mutex_flag(DESTROY, "%m, %M", container->lock_print, container->n_fork))
+         return (free(philosopher), true);
     free(philosopher);
     return (false);
 }

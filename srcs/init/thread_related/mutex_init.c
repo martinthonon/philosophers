@@ -1,58 +1,69 @@
 #include "philo.h"
 
-bool ft_mutex_init(size_t size, pthread_mutex_t *mutex);
-bool ft_mutex_destroy(size_t size, pthread_mutex_t *mutex);
+bool ft_mutex_flag(uint8_t flag, char *formats, ...);
+static bool ft_mutex(uint8_t flag, pthread_mutex_t mutex);
+static bool ft_mutex_ptr(uint8_t flag, pthread_mutex_t *mutex);
 
-bool ft_mutex_init(size_t size, pthread_mutex_t *mutex)
+bool ft_mutex_flag(uint8_t flag, char *formats, ...)
 {
-    size_t i;
-
-    i = 0;
-    while (i < size)
-    {
-        if (pthread_mutex_init(&mutex[i++], NULL) != 0)
-            return (true);
-    }
-    return (false);
-}
-
-bool ft_mutex_destroy(size_t size, pthread_mutex_t *mutex)
-{
-    size_t i;
-
-    i = 0;
-    while (i < size)
-    {
-        if (pthread_mutex_destroy(&mutex[i++]) != 0)
-            return (true);
-    }
-    return (false);
-}
-
-bool ft_mutex_init(size_t size, ...)
-{
-    pthread_mutex_t *mutex_ptr;
-    pthread_mutex_t mutex;
     va_list ap;
-    size_t i;
 
-    va_start(ap, size);
-    while (size-- > 0)
+    va_start(ap, formats);
+    while (*formats != '\0')
     {
-        mutex_ptr = va_arg(ap, pthread_mutex_t *);
-        if (mutex_ptr != NULL)
+        if (*formats++ == '%')
         {
-            i = 0;
-            while (i < sizeof(mutex_ptr) / 40)
-                if (pthread_mutex_init(&mutex_ptr[i], NULL) != 0)
-                    return (va_end(ap),true); 
-        }
-        else
-        {
-            mutex = va_arg(ap, pthread_mutex_t);
-            if (pthread_mutex_init(&mutex, NULL) != 0)
-                return (va_end(ap),true);
+            if (*formats == 'm')
+            {
+                if (ft_mutex(flag, va_arg(ap, pthread_mutex_t)) == true)
+                    return (va_end(ap), true);
+            }
+            else if (*formats == 'M')
+                if (ft_mutex_ptr(flag, va_arg(ap, pthread_mutex_t *)) == true)
+                    return (va_end(ap), true);
         }
     }
-    return (va_end(ap), false);
+    va_end(ap);
+    return (false);
+}
+
+bool ft_mutex(uint8_t flag, pthread_mutex_t mutex)
+{
+    if (flag == INIT)
+    {
+        if (pthread_mutex_init(&mutex, NULL) != 0)
+            return (true);
+    }
+    else
+        if (pthread_mutex_destroy(&mutex) != 0)
+            return (true);
+    return (false);
+}
+
+bool ft_mutex_ptr(uint8_t flag, pthread_mutex_t *mutex)
+{
+    size_t size;
+    size_t i;
+
+    size = sizeof(mutex) / __SIZEOF_PTHREAD_MUTEX_T;
+    i = 0;
+    if (flag == INIT)
+    {
+        while (i < size)
+        {
+           if (pthread_mutex_init(&mutex[i], NULL) != 0)
+           {
+            size = 0;
+            while (size < i)
+                pthread_mutex_destroy(&mutex[size++]);
+            return (true);
+           }
+           ++i;
+        }
+    }
+    else
+        while (i < size)
+            if (pthread_mutex_destroy(&mutex[i++]) != 0)
+                return (true);
+    return (false);
 }
