@@ -12,6 +12,12 @@
 #include <stdarg.h>
 #include <sys/time.h>
 
+# ifdef __linux__
+#  define SIZEOF_PTHREAD_MUTEX_T 40
+# elif __MACH__
+#  define SIZEOF_PTHREAD_MUTEX_T 56
+# endif
+
 # define INIT 1
 # define DESTROY 0
 

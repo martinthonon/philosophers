@@ -45,7 +45,8 @@ bool ft_mutex_ptr(uint8_t flag, pthread_mutex_t *mutex)
     size_t size;
     size_t i;
 
-    size = sizeof(mutex) / __SIZEOF_PTHREAD_MUTEX_T;
+    printf("--->%d", SIZEOF_PTHREAD_MUTEX_T);
+    size = sizeof(mutex) / SIZEOF_PTHREAD_MUTEX_T;
     i = 0;
     if (flag == INIT)
     {
