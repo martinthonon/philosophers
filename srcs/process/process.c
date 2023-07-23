@@ -11,8 +11,10 @@ bool ft_process(t_dllist *container)
         return (true);
     if (ft_mutex_flag(INIT, "%m, %M", container->lock_print, container->n_fork) == true)
         return (free(philosopher), true);
+    printf("test\n");
     if (ft_thread_start(container, philosopher, container->sentinel_node->next) == true)
         return (free(philosopher), true);
+    printf("test1\n");
     if (ft_mutex_flag(DESTROY, "%m, %M", container->lock_print, container->n_fork))
          return (free(philosopher), true);
     free(philosopher);

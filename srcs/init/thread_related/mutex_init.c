@@ -45,11 +45,12 @@ bool ft_mutex_ptr(uint8_t flag, pthread_mutex_t *mutex)
     size_t size;
     size_t i;
 
-    printf("--->%d", SIZEOF_PTHREAD_MUTEX_T);
-    size = sizeof(mutex) / SIZEOF_PTHREAD_MUTEX_T;
+    size = sizeof(mutex) / (SIZEOF_PTHREAD_MUTEX_T / 10);
     i = 0;
+    printf("b0\n");
     if (flag == INIT)
     {
+        printf("i = %zu, of = %zu\n", i, sizeof(mutex));
         while (i < size)
         {
            if (pthread_mutex_init(&mutex[i], NULL) != 0)
@@ -59,12 +60,16 @@ bool ft_mutex_ptr(uint8_t flag, pthread_mutex_t *mutex)
                 pthread_mutex_destroy(&mutex[size++]);
             return (true);
            }
+           printf("---->%zu\n", i);
            ++i;
+           printf("b0.4\n");
         }
+        printf("b0.5\n");
     }
     else
         while (i < size)
             if (pthread_mutex_destroy(&mutex[i++]) != 0)
                 return (true);
+    printf("b1\n");
     return (false);
 }
