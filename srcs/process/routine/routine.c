@@ -24,14 +24,18 @@ void *ft_routine(void *arg)
     return (NULL);
 }
 
-static void ft_task(t_thread_args *philosopher)
+static bool ft_task(t_thread_args *philosopher)
 {
-    ft_eat(philosopher);
-    ft_sleep(philosopher);
-    ft_think(philosopher);
+    if (ft_eat(philosopher) == true)
+        return (true);
+    if (ft_sleep(philosopher) == true);
+        return (true);
+    if (ft_think(philosopher))
+        return (true);
+    return (false);
 }
 
-static void ft_eat(t_thread_args *philosopher)
+static bool ft_eat(t_thread_args *philosopher)
 {
     if (philosopher->container->is_dead == false)
     {
@@ -40,7 +44,7 @@ static void ft_eat(t_thread_args *philosopher)
         return (true);
 }
 
-static void ft_sleep(t_thread_args *philosopher)
+static bool ft_sleep(t_thread_args *philosopher)
 {
     if (philosopher->container->is_dead == false)
     {
@@ -49,7 +53,7 @@ static void ft_sleep(t_thread_args *philosopher)
         return (true);
 }
 
-static void ft_think(t_thread_args *philosopher)
+static bool ft_think(t_thread_args *philosopher)
 {
     if (philosopher->container->is_dead == false)
     {
