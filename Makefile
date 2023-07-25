@@ -19,7 +19,7 @@ SRCS_PHILO:= main \
 			list/list_add_back \
 			list/list_destroy \
 			list/list_new \
-			process/routine/routine \
+			process/routine \
 			process/process \
 			utils/atomic_print \
 			utils/free \

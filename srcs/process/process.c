@@ -25,6 +25,7 @@ static bool ft_thread_start(t_dllist *container, t_thread_args *philosopher, t_d
     void *result;
 
     i = 0;
+    container->time_start = ft_get_time_ms();
     while (i < container->size)
     {
         philosopher[i] = ft_thread_init(container, philosopher[i], node);
