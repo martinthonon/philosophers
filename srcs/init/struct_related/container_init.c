@@ -24,13 +24,8 @@ bool ft_container_init(int argc, char **argv, t_dllist *container)
     if (container->n_fork == NULL)
         return (true);
     if (argc == 6)
-    {
-        container->n_meal_till_full = malloc(sizeof(uint32_t));
-        if (container == NULL)
-            return (true);
-        *container->n_meal_till_full = ft_str_to_ui(argv[4], &is_overflow);
-    }
+        container->n_meal_till_full = ft_str_to_ui(argv[4], &is_overflow);
     else
-        container->n_meal_till_full = NULL;
+        container->n_meal_till_full = NO_MEAL;
     return (is_overflow);
 }

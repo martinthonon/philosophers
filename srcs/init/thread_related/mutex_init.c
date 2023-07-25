@@ -29,12 +29,10 @@ bool ft_mutex_flag(uint8_t flag, char *formats, ...)
 
 bool ft_mutex(uint8_t flag, pthread_mutex_t *mutex)
 {
-    printf(">>%p\n", mutex);
     if (flag == INIT)
     {
         if (pthread_mutex_init(mutex, NULL) != 0)
             return (true);
-        printf(">>>%p\n", mutex);
     }
     else
         if (pthread_mutex_destroy(mutex) != 0)

@@ -19,12 +19,9 @@ SRCS_PHILO:= main \
 			list/list_add_back \
 			list/list_destroy \
 			list/list_new \
-			process/routine/eat \
-			process/routine/fork \
 			process/routine/routine \
-			process/routine/sleep \
-			process/routine/think \
 			process/process \
+			utils/atomic_print \
 			utils/free \
 			utils/str_to_num \
 			utils/time
