@@ -34,7 +34,7 @@ DEPS:=	${OBJS:.o=.d}
 
 CFLAGS:= -Wall -Wextra -Werror -Wuninitialized -Winit-self -Wshadow -Wdouble-promotion -Wundef -fno-common -Wconversion -g3 -O3
 
-SANITIZE:= -fsanitize=address -g3 -O3 -fno-omit-frame-pointer
+SANITIZE:= -O3 -fno-omit-frame-pointer #ß-fsanitize=address -g3 
 
 CPPFLAGS:= ${addprefix -I,${INC_DIR}} -MMD -MP
 

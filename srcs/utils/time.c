@@ -17,3 +17,5 @@ bool ft_diff_time_ms(uint64_t start_time, uint64_t diff_time)
         return (true);
     return (false);
 }
+
+bool ft_will_die

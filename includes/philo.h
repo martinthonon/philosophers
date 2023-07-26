@@ -17,8 +17,8 @@
 # define DESTROY 0
 # define FORK "has taken fork"
 # define EATING "is eating"
-# define THINKING "is sleeping"
-# define SLEEPING "is thinking"
+# define THINKING "is thinking"
+# define SLEEPING "is sleeping"
 # define DEAD "died"
 
 typedef struct s_dllist_node 
@@ -27,6 +27,7 @@ typedef struct s_dllist_node
     struct s_dllist_node *next;
     size_t index;
     uint64_t time_till_last_meal;
+    uint32_t slow_death;
 
 }              t_dllist_node;
 
