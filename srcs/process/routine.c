@@ -45,6 +45,7 @@ static bool ft_eat(t_thread_args *philosopher)
     if (philosopher->container->is_dead == false)
     {
         pthread_mutex_lock(&philosopher->container->n_fork[philosopher->node->index]);
+        ft_atomic_print(philosopher, FORK);
         pthread_mutex_lock(&philosopher->container->n_fork[philosopher->node->index + 1]);
         ft_atomic_print(philosopher, FORK);
         if (ft_timeout(philosopher, philosopher->container->time_to_eat) == true) 
@@ -65,8 +66,6 @@ static bool ft_eat(t_thread_args *philosopher)
             philosopher->node->time_till_last_meal = ft_get_time_ms();
             ft_usleep(philosopher->container->time_to_eat);
         }
-        pthread_mutex_lock(&philosopher->container->n_fork[philosopher->node->index]);
-        pthread_mutex_lock(&philosopher->container->n_fork[philosopher->node->index + 1]);
     }
     else
         return (true);
@@ -91,9 +90,13 @@ static bool ft_sleep(t_thread_args *philosopher)
         }
         else
         {
+            pthread_mutex_unlock(&philosopher->container->n_fork[philosopher->node->index]); //take fork after sleeping
+            pthread_mutex_unlock(&philosopher->container->n_fork[philosopher->node->index + 1]);
             ft_atomic_print(philosopher, SLEEPING);
             ft_usleep(philosopher->container->time_to_sleep);
         }
+        // pthread_mutex_unlock(&philosopher->container->n_fork[philosopher->node->index]); //take fork after sleeping
+        // pthread_mutex_unlock(&philosopher->container->n_fork[philosopher->node->index + 1]);
     }
     else
         return (true);
