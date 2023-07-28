@@ -12,8 +12,10 @@ void *ft_routine(void *arg)
     uint32_t n_meal;
 
     philosopher = arg;
+    if ((philosopher->node->index & 1) == 0)
+        ft_usleep(philosopher->container->time_to_eat / 2);
     philosopher->node->time_till_last_meal = ft_get_time_ms();
-    if (philosopher->container->n_meal_till_full != NO_MEAL)
+    if (philosopher->container->n_meal_till_full > 0)
     {
         n_meal = 1;
         while (n_meal++ <= philosopher->container->n_meal_till_full)
@@ -42,17 +44,29 @@ static bool ft_eat(t_thread_args *philosopher)
 {
     if (philosopher->container->is_dead == false)
     {
-        if (ft_timeout(philosopher->container->time_to_eat) == true)
+        pthread_mutex_lock(&philosopher->container->n_fork[philosopher->node->index]);
+        pthread_mutex_lock(&philosopher->container->n_fork[philosopher->node->index + 1]);
+        ft_atomic_print(philosopher, FORK);
+        if (ft_timeout(philosopher, philosopher->container->time_to_eat) == true) 
         {
-            usleep(philosopher->node->slow_death * 1000);
-            philosopher->container->is_dead = true;
-            ft_atomic_print(philosopher, DEAD);
+            ft_usleep(ft_time_left_to_die(philosopher));
+            //pthread_mutex_lock(&philosopher->container->cool_down);
+            if (philosopher->container->is_dead == false)
+            {
+                philosopher->container->is_dead = true;
+                ft_atomic_print(philosopher, DEAD);
+            }
+            //pthread_mutex_unlock(&philosopher->container->cool_down);
+            return (true);
         }
         else
         {
             ft_atomic_print(philosopher, EATING);
-            usleep(philosopher->container->time_to_eat * 1000); //ft_usleep
+            philosopher->node->time_till_last_meal = ft_get_time_ms();
+            ft_usleep(philosopher->container->time_to_eat);
         }
+        pthread_mutex_lock(&philosopher->container->n_fork[philosopher->node->index]);
+        pthread_mutex_lock(&philosopher->container->n_fork[philosopher->node->index + 1]);
     }
     else
         return (true);
@@ -63,19 +77,22 @@ static bool ft_sleep(t_thread_args *philosopher)
 {
     if (philosopher->container->is_dead == false)
     {
-        const uint32_t now = ft_get_time_ms();
-        //if (philosopher->container->time_to_die + philosopher->node->time_till_last_meal * philosopher->node->time_till_last_meal - now < philosopher->container->t)
-        if (ft_timeout(philosopher->container->time_to_sleep) == true)
+        if (ft_timeout(philosopher, philosopher->container->time_to_sleep) == true)
         {
-            usleep(philosopher->node->slow_death * 1000);
-            philosopher->container->is_dead = true;
-            ft_atomic_print(philosopher, DEAD);
+            ft_usleep(ft_time_left_to_die(philosopher));
+            //pthread_mutex_lock(&philosopher->container->cool_down);
+            if (philosopher->container->is_dead == false)
+            {
+                philosopher->container->is_dead = true;
+                ft_atomic_print(philosopher, DEAD);
+            }
+            //pthread_mutex_unlock(&philosopher->container->cool_down);
             return (true);
         }
         else
         {
             ft_atomic_print(philosopher, SLEEPING);
-            usleep(philosopher->container->time_to_sleep * 1000);
+            ft_usleep(philosopher->container->time_to_sleep);
         }
     }
     else
@@ -86,22 +103,8 @@ static bool ft_sleep(t_thread_args *philosopher)
 static bool ft_think(t_thread_args *philosopher)
 {
     if (philosopher->container->is_dead == false)
-    {
-        if (1)
-        {
-            //usleep(philosopher->node->slow_death * 1000);
-            philosopher->container->is_dead = true;
-            ft_atomic_print(philosopher, DEAD);
-            return (true);
-        }
-        else
-            ft_atomic_print(philosopher, THINKING);  
-    }
+            ft_atomic_print(philosopher, THINKING);
     else
         return (true); 
     return (false);
 }
-
-
-// if (last_meal + time_to_eat > last_meal + time_to_die)
-//     time_to_eat - time_to_die > 1 ??

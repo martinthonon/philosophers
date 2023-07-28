@@ -36,9 +36,10 @@ typedef struct s_dllist
     t_dllist_node *sentinel_node;
     pthread_mutex_t *n_fork;
     pthread_mutex_t lock_print;
+    pthread_mutex_t cool_down;
     size_t size;
     uint64_t time_start;
-    uint32_t time_to_die;
+    uint32_t time_to_die; //64 ?
     uint32_t time_to_eat;
     uint32_t time_to_sleep;
     uint32_t n_meal_till_full;
@@ -70,7 +71,10 @@ bool ft_process(t_dllist *container);
 uint64_t ft_str_to_ul(char *str, bool *is_overflow);
 uint64_t ft_get_time_ms(void);
 uint32_t ft_str_to_ui(char *str, bool *is_overflow);
-bool ft_diff_time_ms(uint64_t start_time, uint64_t diff_time);
+bool ft_diff_time_ms(uint64_t start_time, uint64_t diff_time); //is use ?
+bool ft_timeout(t_thread_args *philosopher, uint64_t time_till);
+uint64_t ft_time_left_to_die(t_thread_args *philosopher);
+void	ft_usleep(uint64_t ms);
 void	ft_free(const char *formats, ...);
 void ft_atomic_print(t_thread_args *philosopher, char *status);
 
