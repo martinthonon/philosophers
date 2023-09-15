@@ -10,20 +10,22 @@ BUILD_DIR:= build
 SRCS_DIR:= srcs
 INC_DIR:= includes
 
-SRCS_PHILO:= main \
-			init/init \
-			init/struct_related/container_init \
-			init/struct_related/list_init \
-			init/thread_related/mutex_init \
-			init/thread_related/thread_init \
-			list/list_add_back \
-			list/list_destroy \
-			list/list_new \
-			process/routine \
-			process/process \
-			utils/atomic_print \
-			utils/free \
-			utils/str_to_num \
+SRCS_PHILO:= main								\
+			init/init							\
+			init/struct_related/container_init	\
+			init/struct_related/list_init		\
+			init/thread_related/mutex_init		\
+			init/thread_related/thread_init		\
+			list/list_add_back					\
+			list/list_destroy					\
+			list/list_new						\
+			process/process						\
+			process/routine						\
+			process/sub_routine					\
+			utils/atomic_print					\
+			utils/free							\
+			utils/set_mutex						\
+			utils/str_to_num					\
 			utils/time
 
 SRCS:=	${addprefix ${SRCS_DIR}/, ${addsuffix .c, ${SRCS_PHILO}}}

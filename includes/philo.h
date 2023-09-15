@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathonon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:12:16 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/15 12:33:44 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:05:38 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ t_dllist_node	*ft_list_add_back(t_dllist_node *sentinel_node, size_t index);
 t_dllist		*ft_list_new(void);
 void			ft_list_destroy(t_dllist *struct_sentinel);
 
-void			*ft_routine(void *arg);
 bool			ft_process(t_dllist *container);
+void			*ft_routine(void *arg);
+void			
 
 uint64_t		ft_str_to_ul(char *str, bool *is_overflow);
 uint64_t		ft_get_time_ms(void);
@@ -91,6 +92,7 @@ bool			ft_timeout(t_thread_args *philosopher, uint64_t time_till);
 uint64_t		ft_time_left_to_die(t_thread_args *philosopher);
 void			ft_usleep(uint64_t ms);
 void			ft_free(const char *formats, ...);
+bool			ft_set_mutex(uint8_t flag, t_dllist *container);
 void			ft_atomic_print(t_thread_args *philosopher, char *status);
 
 #endif
