@@ -23,7 +23,7 @@ bool	ft_process(t_dllist *container)
 		return (true);
 	if (ft_set_mutex(INIT, container) == true)
 		return (free(philosopher), true);
-	if (ft_sub_routine(container, philosopher) == true) //set a bool ?
+	if (ft_sub_routine(container, philosopher) == true) //set a bool ? ||
 	{
 		ft_set_mutex(DESTROY, container);
 		return (free(philosopher), true);
