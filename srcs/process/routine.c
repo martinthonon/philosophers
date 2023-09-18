@@ -4,7 +4,6 @@ void *ft_routine(void *arg);
 static bool ft_task(t_thread_args *philosopher);
 static bool ft_eat(t_thread_args *philosopher);
 static bool ft_sleep(t_thread_args *philosopher);
-static bool ft_think(t_thread_args *philosopher);
 
 void *ft_routine(void *arg)
 {    
@@ -31,29 +30,19 @@ void *ft_routine(void *arg)
 
 static bool ft_task(t_thread_args *philosopher)
 {
-    if (ft_eat(philosopher) == true)
-        return (true);
-    if (ft_sleep(philosopher) == true)
-        return (true);
-    if (ft_think(philosopher) == true)
-        return (true);
+    ft_atomic_print(philosopher, THINKING);
+    ft_eat(philosopher);
+    ft_sleep(philosopher);
     return (false);
 }
 
 static bool ft_eat(t_thread_args *philosopher)
 {
-    printf("id :%zu time :%llu\n", philosopher->node->index, ft_get_time_ms() - philosopher->container->time_start);
-    (void)philosopher;
+    ft_atomic_print(philosopher, EATING);
     return (false);
 }
 
 static bool ft_sleep(t_thread_args *philosopher)
-{
-    (void)philosopher;
-    return (false);
-}
-
-static bool ft_think(t_thread_args *philosopher)
 {
     (void)philosopher;
     return (false);
