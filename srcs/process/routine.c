@@ -17,13 +17,13 @@ void *ft_routine(void *arg)
     if (philosopher->container->n_meal_till_full > 0)
     {
         n_meal = 1;
-        while (n_meal++ <= philosopher->container->n_meal_till_full)
+        while (n_meal++ <= philosopher->container->n_meal_till_full) // ++?
             if (ft_task(philosopher) == true)
                 return (NULL);
     }
     else
         while (true)
-            if (ft_task(philosopher) == true)
+            if (ft_task(philosopher) == true) // void ?
                 return (NULL);
     return (NULL);
 }

@@ -8,6 +8,7 @@ bool ft_sub_routine(t_dllist *container, t_thread_args *philosopher)
 {
 	if (ft_thread_go(container, philosopher) == true)
 		return (true);
+	ft_is_starving();
 	if (ft_thread_join(philosopher, container->size) == true)
 		return (true);
 	return (false);
@@ -25,11 +26,27 @@ static	bool	ft_thread_go(t_dllist *container, t_thread_args *philosopher)
 	while (i < container->size)
 	{
 		pthread_arg = ft_thread_init(container, &philosopher[i], node);
-		if (pthread_create(&philosopher[i++].thread_id, NULL, ft_routine, pthread_arg) != CREATED)
+		if (pthread_create(&philosopher[i].thread_id, NULL, ft_routine, pthread_arg) != CREATED)
+		{
+			ft_thread_join(philosopher, i);
 			return (true);
+		}
+		++i;
 		node = node->next;
 	}
 	return (false);
+}
+
+static bool ft_is_dead(t_dllist *container)
+{
+	t_dllist_node *node;
+
+	node = container->sentinel_node->next;
+	while (true)
+	{
+		node->
+		node = node->next;
+	}
 }
 
 static bool ft_thread_join(t_thread_args *philosopher, size_t size)

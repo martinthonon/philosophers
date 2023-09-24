@@ -90,8 +90,6 @@ uint64_t		ft_get_time_ms(void);
 uint32_t		ft_str_to_ui(char *str, bool *is_overflow);
 bool			ft_diff_time_ms(uint64_t start_time,
 					uint64_t diff_time); //is use ?
-bool			ft_timeout(t_thread_args *philosopher, uint64_t time_till);
-uint64_t		ft_time_left_to_die(t_thread_args *philosopher);
 void			ft_usleep(uint64_t ms);
 void			ft_free(const char *formats, ...);
 bool			ft_set_mutex(uint8_t flag, t_dllist *container);
