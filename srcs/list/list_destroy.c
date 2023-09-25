@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_destroy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathonon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 11:34:35 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/15 11:36:00 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/25 13:50:48 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,17 @@ void	ft_list_destroy(t_dllist *struct_sentinel);
 
 void	ft_list_destroy(t_dllist *struct_sentinel)
 {
-	t_dllist_node	*sentinel_node_cpy;
+	t_dllist_node	*node;
 	t_dllist_node	*node_tmp;
 
-	sentinel_node_cpy = struct_sentinel->sentinel_node;
-	sentinel_node_cpy = sentinel_node_cpy->next;
-	while (sentinel_node_cpy != struct_sentinel->sentinel_node)
+	node = struct_sentinel->sentinel_node->next;
+	while (node->node_type != SENTINEL_NODE)
 	{
-		node_tmp = sentinel_node_cpy;
-		sentinel_node_cpy = sentinel_node_cpy->next;
+		node_tmp = node;
+		node = node->next;
 		free(node_tmp);
 	}
-	free(sentinel_node_cpy);
+	free(node);
 	free(struct_sentinel->n_fork);
 	free(struct_sentinel);
 }

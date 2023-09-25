@@ -44,7 +44,10 @@ static bool ft_is_dead(t_dllist *container)
 	node = container->sentinel_node->next;
 	while (true)
 	{
-		node->
+		if (node->node_type != SENTINEL_NODE)
+		{
+
+		}
 		node = node->next;
 	}
 }
