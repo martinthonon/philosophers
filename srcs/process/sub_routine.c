@@ -39,15 +39,17 @@ static	bool	ft_thread_go(t_dllist *container, t_thread_args *philosopher)
 
 static bool ft_is_dead(t_dllist *container)
 {
-	t_dllist_node *node;
+	t_dllist_node	*node;
 
 	node = container->sentinel_node->next;
 	while (true)
 	{
 		if (node->node_type != SENTINEL_NODE)
-		{
-
-		}
+			if (ft_diff_time_ms(node->time_till_last_meal, container->time_to_die) == true)
+			{
+				container->is_dead = true;
+				printf("is dead");
+			}
 		node = node->next;
 	}
 }
