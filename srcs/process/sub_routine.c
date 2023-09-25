@@ -45,7 +45,7 @@ static bool	ft_is_starving(t_dllist *container)
 	t_dllist_node	*node;
 
 	node = container->sentinel_node->next;
-	while (true)
+	while (true) //communication
 	{
 		if (node->node_type != SENTINEL_NODE)
 			if (ft_diff_time_ms(node->time_till_last_meal, container->time_to_die) == true)
@@ -56,6 +56,7 @@ static bool	ft_is_starving(t_dllist *container)
 			}
 		node = node->next;
 	}
+	return (false);
 }
 
 static bool	ft_thread_join(t_thread_args *philosopher, size_t size)

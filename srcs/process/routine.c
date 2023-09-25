@@ -14,16 +14,15 @@ void *ft_routine(void *arg)
     if ((philosopher->node->index & 1) == 0)
         ft_usleep(philosopher->container->time_to_eat / 2);
     philosopher->node->time_till_last_meal = ft_get_time_ms();
-    if (philosopher->container->n_meal_till_full > 0)
+    if (philosopher->container->n_meal_till_full > NO_MEAL)
     {
-        n_meal = 1;
-        while (n_meal++ <= philosopher->container->n_meal_till_full) // ++?
-            if (ft_task(philosopher) == true)
+        while (philosopher->node->n_meal < philosopher->container->n_meal_till_full)
+            ft_task(philosopher);
                 return (NULL);
     }
     else
         while (true)
-            if (ft_task(philosopher) == true) // void ?
+            ft_task(philosopher); // void ?
                 return (NULL);
     return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:12:16 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/25 11:40:40 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:27:22 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@
 # define SLEEPING "is sleeping"
 # define DEAD "died"
 
-typedef enum	node_type
+typedef enum
 {
 	NODE,
 	SENTINEL_NODE
-}				t_node_type;
+}	t_node_type;
 
 typedef struct s_dllist_node 
 {
@@ -47,23 +47,24 @@ typedef struct s_dllist_node
 	struct s_dllist_node	*next;
 	t_node_type				node_type;
 	size_t					index;
-	uint64_t				time_till_last_meal;
+	_Atomic uint32_t		n_meal;
+	_Atomic uint64_t		time_till_last_meal;
 
 }				t_dllist_node;
 
 typedef struct s_dllist
 {
-	t_dllist_node	*sentinel_node; 
-	pthread_mutex_t	*n_fork;
-	pthread_mutex_t	lock_print;
-	pthread_mutex_t	cool_down;
-	size_t			size;
-	uint64_t		time_start;
-	uint32_t		time_to_die;
-	uint32_t		time_to_eat;
-	uint32_t		time_to_sleep;
-	uint32_t		n_meal_till_full;
-	_Atomic bool	is_dead;
+	t_dllist_node		*sentinel_node; 
+	pthread_mutex_t		*n_fork;
+	pthread_mutex_t		lock_print;
+	pthread_mutex_t		cool_down;
+	size_t				size;
+	uint64_t			time_start;
+	uint32_t			time_to_die;
+	uint32_t			time_to_eat;
+	uint32_t			time_to_sleep;
+	_Atomic uint32_t	n_meal_till_full;
+	_Atomic bool		is_dead;
 }				t_dllist;
 
 typedef struct s_thread_args
