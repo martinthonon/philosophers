@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:12:16 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/25 16:27:22 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:52:52 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_dllist_node
 	struct s_dllist_node	*next;
 	t_node_type				node_type;
 	size_t					index;
-	_Atomic uint32_t		n_meal;
+	uint32_t				n_meal;
 	_Atomic uint64_t		time_till_last_meal;
 
 }				t_dllist_node;
@@ -63,7 +63,7 @@ typedef struct s_dllist
 	uint32_t			time_to_die;
 	uint32_t			time_to_eat;
 	uint32_t			time_to_sleep;
-	_Atomic uint32_t	n_meal_till_full;
+	uint32_t			n_meal_till_full;
 	_Atomic bool		is_dead;
 }				t_dllist;
 
@@ -96,7 +96,7 @@ uint64_t		ft_str_to_ul(char *str, bool *is_overflow);
 uint64_t		ft_get_time_ms(void);
 uint32_t		ft_str_to_ui(char *str, bool *is_overflow);
 bool			ft_diff_time_ms(uint64_t start_time,
-					uint64_t diff_time); //is use ?
+					uint64_t diff_time);
 void			ft_usleep(uint64_t ms);
 void			ft_free(const char *formats, ...);
 bool			ft_set_mutex(uint8_t flag, t_dllist *container);
