@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathonon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 11:36:18 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/15 11:41:18 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:42:01 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_dllist	*ft_list_new(void)
 	struct_sentinel->sentinel_node = sentinel_node;
 	sentinel_node->prev = sentinel_node;
 	sentinel_node->next = sentinel_node;
+	sentinel_node->node_type = SENTINEL_NODE;
 	return (struct_sentinel);
 }

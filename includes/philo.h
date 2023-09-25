@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:12:16 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/18 16:58:53 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:40:40 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,19 @@
 # define SLEEPING "is sleeping"
 # define DEAD "died"
 
+typedef enum	node_type
+{
+	NODE,
+	SENTINEL_NODE
+}				t_node_type;
+
 typedef struct s_dllist_node 
 {
 	struct s_dllist_node	*prev;
 	struct s_dllist_node	*next;
+	t_node_type				node_type;
 	size_t					index;
 	uint64_t				time_till_last_meal;
-	uint32_t				slow_death;
 
 }				t_dllist_node;
 
