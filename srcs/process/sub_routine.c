@@ -2,19 +2,22 @@
 
 bool			ft_sub_routine(t_dllist *container, t_thread_args *philosopher);
 static	bool	ft_thread_go(t_dllist *container, t_thread_args *philosopher);
+static bool		ft_is_starving(t_dllist *container);
 static	bool	ft_thread_join(t_thread_args *philosopher, size_t size);
 
-bool ft_sub_routine(t_dllist *container, t_thread_args *philosopher)
+bool	ft_sub_routine(t_dllist *container, t_thread_args *philosopher)
 {
+	bool is_starving;
+	bool is_join;
+
 	if (ft_thread_go(container, philosopher) == true)
 		return (true);
-	ft_is_starving();
-	if (ft_thread_join(philosopher, container->size) == true)
-		return (true);
-	return (false);
+	is_starving = ft_is_starving(container);
+	is_join = ft_thread_join(philosopher, container->size);
+	return (is_starving || is_join);
 }
 
-static	bool	ft_thread_go(t_dllist *container, t_thread_args *philosopher)
+static bool	ft_thread_go(t_dllist *container, t_thread_args *philosopher)
 {
 	t_thread_args	*pthread_arg;
 	t_dllist_node	*node;
@@ -37,7 +40,7 @@ static	bool	ft_thread_go(t_dllist *container, t_thread_args *philosopher)
 	return (false);
 }
 
-static bool ft_is_dead(t_dllist *container)
+static bool	ft_is_starving(t_dllist *container)
 {
 	t_dllist_node	*node;
 
@@ -48,13 +51,14 @@ static bool ft_is_dead(t_dllist *container)
 			if (ft_diff_time_ms(node->time_till_last_meal, container->time_to_die) == true)
 			{
 				container->is_dead = true;
-				printf("is dead");
+				printf("%llu %zu %s\n", ft_get_time_ms() - container->time_start, node->index, DEAD);
+				return (true);
 			}
 		node = node->next;
 	}
 }
 
-static bool ft_thread_join(t_thread_args *philosopher, size_t size)
+static bool	ft_thread_join(t_thread_args *philosopher, size_t size)
 {
 	size_t i;
 	
