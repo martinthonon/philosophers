@@ -47,6 +47,8 @@ typedef struct s_dllist_node
 	struct s_dllist_node	*next;
 	t_node_type				node_type;
 	size_t					index;
+	pthread_mutex_t			*l_fork;
+	pthread_mutex_t			*r_fork;
 	uint32_t				n_meal;
 	_Atomic uint64_t		time_till_last_meal;
 
