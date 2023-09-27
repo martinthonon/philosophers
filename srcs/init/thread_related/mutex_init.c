@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 10:49:53 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/15 16:43:11 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:39:54 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool		ft_mutex_flag(uint8_t flag, char *formats, ...);
 static bool	ft_mutex(uint8_t flag, pthread_mutex_t *mutex);
-static bool	ft_mutex_ptr(uint8_t flag, pthread_mutex_t *mutex, size_t size);
+static bool	ft_mutex_ptr(uint8_t flag, pthread_mutex_t *mutex, ssize_t size);
 
 bool	ft_mutex_flag(uint8_t flag, char *formats, ...)
 {
@@ -32,7 +32,7 @@ bool	ft_mutex_flag(uint8_t flag, char *formats, ...)
 			}
 			else if (*formats == 'M')
 				if (ft_mutex_ptr(flag, va_arg(ap, pthread_mutex_t *),
-						va_arg(ap, size_t)) == true)
+						va_arg(ap, ssize_t)) == true)
 					return (va_end(ap), true); 
 		}
 	}
@@ -42,39 +42,38 @@ bool	ft_mutex_flag(uint8_t flag, char *formats, ...)
 
 bool	ft_mutex(uint8_t flag, pthread_mutex_t *mutex)
 {
-	if (flag == INIT)
+	if (flag == FLAG_INIT)
 	{
-		if (pthread_mutex_init(mutex, NULL) != 0)
+		if (pthread_mutex_init(mutex, NULL) != INIT)
 			return (true);
 	}
 	else
-		if (pthread_mutex_destroy(mutex) != 0)
+		if (pthread_mutex_destroy(mutex) != DESTROY)
 			return (true);
 	return (false);
 }
 
-bool	ft_mutex_ptr(uint8_t flag, pthread_mutex_t *mutex, size_t size)
+bool	ft_mutex_ptr(uint8_t flag, pthread_mutex_t *mutex, ssize_t size)
 {
-	size_t	i;
+	ssize_t	i;
 
-	i = 0;
-	if (flag == INIT)
+	i = -1;
+	if (flag == FLAG_INIT)
 	{
-		while (i < size)
+		while (++i < size)
 		{
-			if (pthread_mutex_init(&mutex[i], NULL) != 0)
+			if (pthread_mutex_init(&mutex[i], NULL) != INIT)
 			{
-				size = 0;
-				while (size < i)
-					pthread_mutex_destroy(&mutex[size++]);
+				size = -1;
+				while (++size < i)
+					pthread_mutex_destroy(&mutex[size]);
 				return (true);
 			}
-			++i;
 		}
 	}
 	else
-		while (i < size)
-			if (pthread_mutex_destroy(&mutex[i++]) != 0)
+		while (++i < size)
+			if (pthread_mutex_destroy(&mutex[i]) != DESTROY)
 				return (true);
 	return (false);
 }

@@ -10,7 +10,7 @@ bool	ft_sub_routine(t_dllist *container, t_thread_args *philosopher)
 	bool is_starving;
 	bool is_join;
 
-	if (ft_thread_go(container, philosopher) == true)
+	if (ft_thread_start(container, philosopher) == true)
 		return (true);
 	is_starving = ft_is_starving(container);
 	is_join = ft_thread_join(philosopher, container->size);
@@ -65,7 +65,7 @@ static bool	ft_thread_join(t_thread_args *philosopher, ssize_t size)
 	ssize_t i;
 
 	i = -1;
-	while (i++ < size)
+	while (++i < size)
 		if (pthread_join(philosopher[i].thread_id, NULL) != JOINED)
 			return (true);
 	return (false);

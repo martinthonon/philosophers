@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 11:46:33 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/18 16:18:26 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:37:04 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ bool	ft_process(t_dllist *container)
 
 	if (ft_thread_create(container->size, &philosopher) == true)
 		return (true);
-	if (ft_set_mutex(INIT, container) == true)
+	if (ft_set_mutex(FLAG_INIT, container) == true)
 		return (free(philosopher), true);
 	sub_routine = ft_sub_routine(container, philosopher);
-	mutex_destroy = ft_set_mutex(DESTROY, container);
+	mutex_destroy = ft_set_mutex(FLAG_DESTROY, container);
 	return (free(philosopher), sub_routine || mutex_destroy);
 }

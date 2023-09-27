@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:12:16 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/27 16:32:37 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:36:49 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@
 # include <sys/time.h>
 
 # define NO_MEAL 0
-# define INIT 1
+# define FLAG_INIT 1
+# define FLAG_DESTROY 0
+# define INIT 0
 # define DESTROY 0
 # define CREATED 0
 # define JOINED 0
@@ -59,7 +61,6 @@ typedef struct s_dllist
 	t_dllist_node		*sentinel_node; 
 	pthread_mutex_t		*n_fork;
 	pthread_mutex_t		lock_print;
-	pthread_mutex_t		cool_down;
 	ssize_t				size;
 	uint64_t			time_start;
 	uint32_t			time_to_die;

@@ -23,7 +23,7 @@ SRCS_PHILO:= main								\
 			process/routine						\
 			process/sub_routine					\
 			utils/atomic_print					\
-			utils/free							\
+			utils/freef							\
 			utils/set_mutex						\
 			utils/str_to_num					\
 			utils/time
