@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 10:44:20 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/27 10:50:31 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:30:41 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ bool	ft_container_init(int argc, char **argv, t_dllist *container)
 
 	is_overflow = false;
 	container->is_dead = false;
-	container->size = ft_str_to_ul(argv[0], &is_overflow);
+	container->size = (ssize_t)ft_str_to_ul(argv[0], &is_overflow);
 	container->time_to_die = ft_str_to_ui(argv[1], &is_overflow);
 	container->time_to_eat = ft_str_to_ui(argv[2], &is_overflow);
 	container->time_to_sleep = ft_str_to_ui(argv[3], &is_overflow);
-	container->n_fork = malloc(sizeof(pthread_mutex_t) * (container->size));
+	container->n_fork = malloc(sizeof(pthread_mutex_t) * (size_t)(container->size));
 	if (container->n_fork == NULL)
 		return (true);
 	if (argc == 6)

@@ -14,6 +14,7 @@ uint64_t ft_get_time_ms(void)
 
 bool ft_diff_time_ms(uint64_t start_time, uint64_t diff_time)
 {
+    //printf("--> %llu, --> %llu\n", start_time + diff_time, ft_get_time_ms());
     if (start_time + diff_time < ft_get_time_ms())
         return (true);
     return (false);

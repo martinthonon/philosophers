@@ -1,9 +1,9 @@
 #include "philo.h"
 
-bool			ft_sub_routine(t_dllist *container, t_thread_args *philosopher);
-static	bool	ft_thread_go(t_dllist *container, t_thread_args *philosopher);
-static bool		ft_is_starving(t_dllist *container);
-static	bool	ft_thread_join(t_thread_args *philosopher, size_t size);
+bool		ft_sub_routine(t_dllist *container, t_thread_args *philosopher);
+static bool	ft_thread_start(t_dllist *container, t_thread_args *philosopher);
+static bool	ft_is_starving(t_dllist *container);
+static bool	ft_thread_join(t_thread_args *philosopher, ssize_t size);
 
 bool	ft_sub_routine(t_dllist *container, t_thread_args *philosopher)
 {
@@ -17,16 +17,16 @@ bool	ft_sub_routine(t_dllist *container, t_thread_args *philosopher)
 	return (is_starving || is_join);
 }
 
-static bool	ft_thread_go(t_dllist *container, t_thread_args *philosopher)
+static bool	ft_thread_start(t_dllist *container, t_thread_args *philosopher)
 {
 	t_thread_args	*pthread_arg;
 	t_dllist_node	*node;
-	size_t			i;
+	ssize_t			i;
 
 	container->time_start = ft_get_time_ms();
 	node = container->sentinel_node->next;
-	i = 0;
-	while (i < container->size)
+	i = -1;
+	while (++i < container->size)
 	{
 		pthread_arg = ft_thread_init(container, &philosopher[i], node);
 		if (pthread_create(&philosopher[i].thread_id, NULL, ft_routine, pthread_arg) != CREATED)
@@ -34,7 +34,6 @@ static bool	ft_thread_go(t_dllist *container, t_thread_args *philosopher)
 			ft_thread_join(philosopher, i);
 			return (true);
 		}
-		++i;
 		node = node->next;
 	}
 	return (false);
@@ -49,10 +48,10 @@ static bool	ft_is_starving(t_dllist *container)
 	{
 		if (node->node_type != SENTINEL_NODE)
 		{
-			if (ft_diff_time_ms(node->time_till_last_meal, container->time_to_die) == false)
+			if (ft_diff_time_ms(node->time_till_last_meal, container->time_to_die) == true)
 			{
 				container->is_dead = true;
-				printf("%llu %zu %s\n", ft_get_time_ms() - container->time_start, node->index, DEAD);
+				printf("%llu %zu %s\n", ft_get_time_ms() - container->time_start, node->index + 1, DEAD);
 				return (true);
 			}
 		}
@@ -61,13 +60,13 @@ static bool	ft_is_starving(t_dllist *container)
 	return (false);
 }
 
-static bool	ft_thread_join(t_thread_args *philosopher, size_t size)
+static bool	ft_thread_join(t_thread_args *philosopher, ssize_t size)
 {
-	size_t i;
-	
-	i = 0;
-	while (i < size)
-		if (pthread_join(philosopher[i++].thread_id, NULL) != JOINED)
+	ssize_t i;
+
+	i = -1;
+	while (i++ < size)
+		if (pthread_join(philosopher[i].thread_id, NULL) != JOINED)
 			return (true);
 	return (false);
 }

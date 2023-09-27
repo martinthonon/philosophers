@@ -6,15 +6,15 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 11:01:52 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/25 11:57:01 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:27:16 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_dllist_node	*ft_list_add_back(t_dllist_node *sentinel_node, size_t index);
+t_dllist_node	*ft_list_add_back(t_dllist_node *sentinel_node, ssize_t index);
 
-t_dllist_node	*ft_list_add_back(t_dllist_node *sentinel_node, size_t index)
+t_dllist_node	*ft_list_add_back(t_dllist_node *sentinel_node, ssize_t index)
 {
 	t_dllist_node	*new_node;
 	t_dllist_node	*prev_node;

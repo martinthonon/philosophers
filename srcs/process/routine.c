@@ -9,12 +9,9 @@ void *ft_routine(void *arg)
     t_thread_args *philosopher;
 
     philosopher = arg;
-    philosopher->node->left_fork = &philosopher->container->n_fork[philosopher->node->index % philosopher->container->size];
-    philosopher->node->right_fork = &philosopher->container->n_fork[(philosopher->node->index - 1) % philosopher->container->size];
     if ((philosopher->node->index & 1) == 0)
         ft_usleep(philosopher->container->time_to_eat / 2);
-    philosopher->node->time_till_last_meal = ft_get_time_ms();
-    while (!philosopher->container->is_dead)
+    while (philosopher->container->is_dead == false)
     {
         ft_atomic_print(philosopher, THINKING);
         ft_eat(philosopher);
@@ -25,15 +22,24 @@ void *ft_routine(void *arg)
 
 static void ft_eat(t_thread_args *philosopher)
 {
+    if (philosopher->container->is_dead == true)
+        return ;
+    pthread_mutex_lock(philosopher->node->left_fork);
+    ft_atomic_print(philosopher, FORK);
+    pthread_mutex_lock(philosopher->node->right_fork);
+    ft_atomic_print(philosopher, FORK);
     ft_atomic_print(philosopher, EATING);
     philosopher->node->time_till_last_meal = ft_get_time_ms();
-    printf("%d\n", philosopher->container->time_to_eat);
+    philosopher->node->n_meal++;
     ft_usleep(philosopher->container->time_to_eat);
+    pthread_mutex_unlock(philosopher->node->right_fork);
+    pthread_mutex_unlock(philosopher->node->left_fork);
 }
 
 static void ft_sleep(t_thread_args *philosopher)
 {
-    printf("test\n");
+    if (philosopher->container->is_dead == true)
+        return ;
     ft_atomic_print(philosopher, SLEEPING);
     ft_usleep(philosopher->container->time_to_sleep);
 }

@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:12:16 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/27 09:41:08 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:32:37 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_dllist_node
 	struct s_dllist_node	*prev;
 	struct s_dllist_node	*next;
 	t_node_type				node_type;
-	size_t					index;
+	ssize_t					index;
 	pthread_mutex_t			*left_fork;
 	pthread_mutex_t			*right_fork;
 	uint32_t				n_meal;
@@ -60,7 +60,7 @@ typedef struct s_dllist
 	pthread_mutex_t		*n_fork;
 	pthread_mutex_t		lock_print;
 	pthread_mutex_t		cool_down;
-	size_t				size;
+	ssize_t				size;
 	uint64_t			time_start;
 	uint32_t			time_to_die;
 	uint32_t			time_to_eat;
@@ -81,12 +81,12 @@ t_thread_args	*ft_thread_init(t_dllist *container, t_thread_args *philosopher,
 bool			ft_container_create(t_dllist **struct_sentinel);
 bool			ft_container_init(int argc, char **argv,
 					t_dllist *struct_sentinel);
-bool			ft_list_init(t_dllist_node *sentinel_node, size_t list_size);
+bool			ft_list_init(t_dllist_node *sentinel_node, ssize_t list_size);
 bool			ft_arg_init(int argc, char **argv, t_dllist **struct_sentinel);
-bool			ft_thread_create(size_t size, t_thread_args **philosopher);
+bool			ft_thread_create(ssize_t size, t_thread_args **philosopher);
 bool			ft_mutex_flag(uint8_t flag, char *formats, ...);
 
-t_dllist_node	*ft_list_add_back(t_dllist_node *sentinel_node, size_t index);
+t_dllist_node	*ft_list_add_back(t_dllist_node *sentinel_node, ssize_t index);
 t_dllist		*ft_list_new(void);
 void			ft_list_destroy(t_dllist *struct_sentinel);
 
