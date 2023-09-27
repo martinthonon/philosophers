@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:12:16 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/25 16:52:52 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:41:08 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_dllist_node
 	struct s_dllist_node	*next;
 	t_node_type				node_type;
 	size_t					index;
-	pthread_mutex_t			*l_fork;
-	pthread_mutex_t			*r_fork;
+	pthread_mutex_t			*left_fork;
+	pthread_mutex_t			*right_fork;
 	uint32_t				n_meal;
 	_Atomic uint64_t		time_till_last_meal;
 

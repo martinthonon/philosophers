@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathonon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 10:20:58 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/15 10:24:02 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:48:57 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		return (EXIT_FAILURE);
 	if (ft_arg_init(argc, ++argv, &container) == true)
-		return (EXIT_FAILURE); 
+		return (EXIT_FAILURE);
 	if (ft_process(container) == true)
 	{
 		ft_list_destroy(container);
