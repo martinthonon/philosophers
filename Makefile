@@ -34,9 +34,7 @@ OBJS:=	${SRCS:%.c=${BUILD_DIR}/%.o}
 
 DEPS:=	${OBJS:.o=.d}
 
-CFLAGS:= -Wall -Wextra -Werror -Wuninitialized -Winit-self -Wshadow -Wdouble-promotion -Wundef -fno-common -Wconversion -g3 -O3
-
-#SANITIZE:= -O3 -fno-omit-frame-pointer -fsanitize=thread -g3 
+CFLAGS:= -Wall -Wextra -Werror
 
 CPPFLAGS:= ${addprefix -I,${INC_DIR}} -MMD -MP
 
