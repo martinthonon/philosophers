@@ -9,6 +9,12 @@ void *ft_routine(void *arg)
     t_thread_args *philosopher;
 
     philosopher = arg;
+    if (philosopher->container->size == 1)
+    {
+        ft_atomic_print(philosopher, THINKING);
+        ft_atomic_print(philosopher, FORK);
+        return (NULL);
+    }
     if ((philosopher->node->index & 1) == 0)
         ft_usleep(philosopher->container->time_to_eat / 2);
     while (philosopher->container->is_plenty == false && philosopher->container->is_dead == false)

@@ -44,7 +44,7 @@ static bool	ft_is_starving(t_dllist *container)
 	t_dllist_node	*node;
 
 	node = container->sentinel_node->next;
-	while (container->is_plenty == false) //communication
+	while (container->is_plenty == false)
 	{
 		if (node->node_type != SENTINEL_NODE)
 		{
@@ -56,7 +56,7 @@ static bool	ft_is_starving(t_dllist *container)
 			}
 		}
 		node = node->next;
-		ft_usleep(1);
+		usleep(100); //?
 	}
 	return (false);
 }
