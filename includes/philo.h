@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:12:16 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/28 15:50:18 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:58:59 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
 # include <pthread.h>
 # include <stdbool.h>
-# include <stdint.h>
-# include <limits.h>
 # include <stdarg.h>
 # include <sys/time.h>
 
