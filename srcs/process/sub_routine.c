@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sub_routine.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mathonon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/28 15:28:08 by mathonon          #+#    #+#             */
+/*   Updated: 2023/09/28 15:31:33 by mathonon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 bool		ft_sub_routine(t_dllist *container, t_thread_args *philosopher);
@@ -7,8 +19,8 @@ static bool	ft_thread_join(t_thread_args *philosopher, ssize_t size);
 
 bool	ft_sub_routine(t_dllist *container, t_thread_args *philosopher)
 {
-	bool is_starving;
-	bool is_join;
+	bool	is_starving;
+	bool	is_join;
 
 	if (ft_thread_start(container, philosopher) == true)
 		return (true);
@@ -29,7 +41,8 @@ static bool	ft_thread_start(t_dllist *container, t_thread_args *philosopher)
 	while (++i < container->size)
 	{
 		pthread_arg = ft_thread_init(container, &philosopher[i], node);
-		if (pthread_create(&philosopher[i].thread_id, NULL, ft_routine, pthread_arg) != CREATED)
+		if (pthread_create(&philosopher[i].thread_id, NULL, ft_routine,
+				pthread_arg) != CREATED)
 		{
 			ft_thread_join(philosopher, i);
 			return (true);
@@ -48,22 +61,24 @@ static bool	ft_is_starving(t_dllist *container)
 	{
 		if (node->node_type != SENTINEL_NODE)
 		{
-			if (ft_diff_time_ms(node->time_since_last_meal, container->time_to_die) == true)
+			if (ft_diff_time_ms(node->time_since_last_meal,
+					container->time_to_die) == true)
 			{
 				container->is_dead = true;
-				printf("%llu %zu %s\n", ft_get_time_ms() - container->time_start, node->index + 1, DEAD);
+				printf("%llu %zu %s\n", ft_get_time_ms()
+					- container->time_start, node->index + 1, DEAD);
 				return (true);
 			}
 		}
 		node = node->next;
-		usleep(100); //?
+		usleep(100);
 	}
 	return (false);
 }
 
 static bool	ft_thread_join(t_thread_args *philosopher, ssize_t size)
 {
-	ssize_t i;
+	ssize_t	i;
 
 	i = -1;
 	while (++i < size)
