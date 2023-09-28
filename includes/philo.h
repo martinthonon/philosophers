@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:12:16 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/27 18:36:49 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:40:57 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_dllist_node
 	pthread_mutex_t			*left_fork;
 	pthread_mutex_t			*right_fork;
 	uint32_t				n_meal;
-	_Atomic uint64_t		time_till_last_meal;
+	_Atomic uint64_t		time_since_last_meal;
 
 }				t_dllist_node;
 
@@ -67,6 +67,8 @@ typedef struct s_dllist
 	uint32_t			time_to_eat;
 	uint32_t			time_to_sleep;
 	uint32_t			n_meal_till_full;
+	uint32_t			meal_count; //?
+	_Atomic bool		is_plenty;
 	_Atomic bool		is_dead;
 }				t_dllist;
 

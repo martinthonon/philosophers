@@ -44,11 +44,11 @@ static bool	ft_is_starving(t_dllist *container)
 	t_dllist_node	*node;
 
 	node = container->sentinel_node->next;
-	while (true) //communication
+	while (container->is_plenty == false) //communication
 	{
 		if (node->node_type != SENTINEL_NODE)
 		{
-			if (ft_diff_time_ms(node->time_till_last_meal, container->time_to_die) == true)
+			if (ft_diff_time_ms(node->time_since_last_meal, container->time_to_die) == true)
 			{
 				container->is_dead = true;
 				printf("%llu %zu %s\n", ft_get_time_ms() - container->time_start, node->index + 1, DEAD);
@@ -56,6 +56,7 @@ static bool	ft_is_starving(t_dllist *container)
 			}
 		}
 		node = node->next;
+		ft_usleep(1);
 	}
 	return (false);
 }

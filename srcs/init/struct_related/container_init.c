@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 10:44:20 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/27 18:17:01 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:40:49 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ bool	ft_container_init(int argc, char **argv, t_dllist *container)
 	bool	is_overflow;
 
 	is_overflow = false;
+	container->is_plenty = false;
 	container->is_dead = false;
 	container->size = (ssize_t)ft_str_to_ul(argv[0], &is_overflow);
 	container->time_to_die = ft_str_to_ui(argv[1], &is_overflow);

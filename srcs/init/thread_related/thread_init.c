@@ -6,7 +6,7 @@
 /*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 10:58:36 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/27 18:35:33 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:24:28 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_thread_args	*ft_thread_init(t_dllist *container, t_thread_args *philosopher,
 		node->right_fork = &container->n_fork[container->size - 1];
 	else
 		node->right_fork = &container->n_fork[(node->index - 1) % container->size];
-	node->time_till_last_meal = container->time_start;
+	node->time_since_last_meal = container->time_start;
+	node->n_meal = NO_MEAL;
 	philosopher->container = container;
 	philosopher->node = node;
 	return (philosopher);
