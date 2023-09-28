@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathonon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mathonon <mathonon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:39:46 by mathonon          #+#    #+#             */
-/*   Updated: 2023/09/28 15:43:39 by mathonon         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:40:19 by mathonon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 uint64_t	ft_get_time_ms(void);
-bool		ft_diff_time_ms(uint64_t start_time, uint64_t diff_time); //used ?
+bool		ft_diff_time_ms(uint64_t start_time, uint64_t diff_time);
 void		ft_usleep(uint64_t ms);
 
 uint64_t	ft_get_time_ms(void)
